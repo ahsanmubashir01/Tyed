@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:tyedapp/Constant/Constants/colors/Constants.dart';
 import 'package:tyedapp/Constant/Constants/founts/Constants.dart';
 import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
@@ -158,4 +159,6 @@ class Utils {
       },
     );
   }
+
+
 }

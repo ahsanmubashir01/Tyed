@@ -1,5 +1,4 @@
 // ignore_for_file: must_be_immutable, non_constant_identifier_names, prefer_const_constructors_in_immutables
-import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -20,216 +19,247 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
-  TextEditingController calenderController = TextEditingController();
+  SignupController signupController =
+      Get.put(SignupController(), tag: 'signupController');
 
-  Future<void> selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1950),
-      lastDate: DateTime(2101),
-    );
-    if (picked != null) {
-      String formattedDate = DateFormat('MM dd yyyy').format(picked);
-      calenderController.text = formattedDate.toString();
-    }
-  }
-
-  final SignupController controller = Get.put(SignupController());
-
-  bool isChecked = false;
-
-  var SizeBoxheight = SizedBox(height: Get.height * 0.015);
+  var sizeBoxHeight = SizedBox(height: Get.height * 0.015);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 10,
-          ),
-          child: Column(
-            children: [
-              Image.asset(
-                'assets/signupsignin.png',
-                height: Get.height * 0.25,
-                width: Get.width * 0.58,
-              ),
-              SizedBox(
-                height: Get.height * 0.025,
-              ),
-              Text(
-                'Sign Up',
-                style: AppTextConstant.BoldStyle,
-              ),
-              SizedBox(
-                height: Get.height * 0.025,
-              ),
-              CustomTextFieldSignup(
-                keyboardType: TextInputType.name,
-                onChanged: (value) {
-                  controller.firsrname.value = value;
-                },
-                hintText: 'First name',
-                prefixIcon: Transform.scale(
-                  scaleX: .4,
-                  scaleY: .4,
-                  child: SvgPicture.asset(
-                    'assets/Iconly-Bold-Profile.svg',
-                  ),
+    return Obx(
+      () => Scaffold(
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 10,
+            ),
+            child: Column(
+              children: [
+                Image.asset(
+                  'assets/signupsignin.png',
+                  height: Get.height * 0.25,
+                  width: Get.width * 0.58,
                 ),
-              ),
-              SizeBoxheight,
-              CustomTextFieldSignup(
-                keyboardType: TextInputType.name,
-                onChanged: (value) {
-                  controller.lastname.value = value;
-                },
-                hintText: 'Last name',
-                prefixIcon: Transform.scale(
-                  scaleX: .4,
-                  scaleY: .4,
-                  child: SvgPicture.asset(
-                    'assets/Iconly-Bold-Profile.svg',
-                  ),
+                SizedBox(
+                  height: Get.height * 0.025,
                 ),
-              ),
-              SizeBoxheight,
-              CustomTextFieldSignup(
-                keyboardType: TextInputType.emailAddress,
-                onChanged: (value) {
-                  controller.email.value = value;
-                },
-                hintText: 'Email',
-                prefixIcon: Transform.scale(
-                  scaleX: .4,
-                  scaleY: .4,
-                  child: SvgPicture.asset(
-                    'assets/email.svg',
-                  ),
+                Text(
+                  'Sign Up',
+                  style: AppTextConstant.BoldStyle,
                 ),
-              ),
-              SizeBoxheight,
-              CustomTextFieldSignup(
-                keyboardType: TextInputType.phone,
-                onChanged: (value) {
-                  controller.phoneNo.value = value;
-                },
-                hintText: 'Phone number',
-                prefixIcon: Transform.scale(
-                  scaleX: .4,
-                  scaleY: .4,
-                  child: SvgPicture.asset(
-                    'assets/phone.svg',
-                  ),
+                SizedBox(
+                  height: Get.height * 0.025,
                 ),
-              ),
-              SizeBoxheight,
-              CustomTextFieldSignup(
-                keyboardType: TextInputType.text,
-                onChanged: (value) {
-                  controller.address.value = value;
-                },
-                hintText: 'Address',
-                prefixIcon: Transform.scale(
-                  scaleX: .4,
-                  scaleY: .4,
-                  child: SvgPicture.asset(
-                    'assets/Location.svg',
-                  ),
-                ),
-              ),
-              SizeBoxheight,
-              CustomTextFieldSignup(
-                controller: calenderController,
-                readOnly: true,
-                onTap: () {
-                  selectDate(context);
-                },
-                hintText: 'MM DD YYYY',
-                prefixIcon: Transform.scale(
-                  scaleX: .4,
-                  scaleY: .4,
-                  child: SvgPicture.asset(
-                    'assets/Calendar.svg',
-                  ),
-                ),
-              ),
-              SizeBoxheight,
-              CustomTextFieldSignup(
-                keyboardType: TextInputType.visiblePassword,
-                suffixIcon: Transform.scale(
-                  scaleX: .7,
-                  scaleY: .7,
-                  child: SvgPicture.asset(
-                    'assets/eye.svg',
-                  ),
-                ),
-                onChanged: (value) {
-                  controller.password.value = value;
-                },
-                hintText: 'Password',
-                prefixIcon: Transform.scale(
-                  scaleX: .4,
-                  scaleY: .4,
-                  child: SvgPicture.asset(
-                    'assets/Lock.svg',
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  CustomCheckbox(),
-                  SizedBox(
-                    width: 6,
-                  ),
-                  Text('I agree to'),
-                  Text(
-                    'Terms and Conditions',
-                    style: TextStyle(color: AppColorsConstants.AppMainColor),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: Get.height * 0.025,
-              ),
-              CustomElevatedButton(
-                width: Get.width * 0.4,
-                text: 'Sign up',
-                onpress: () {
-                  Get.toNamed(RoutesName.Signin);
-                },
-              ),
-              SizeBoxheight,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Already have an Account?',
-                    style: AppTextConstant.SimpleStyle,
-                  ),
-                  SizedBox(width: 5),
-                  InkWell(
-                    onTap: () {
-                      Get.to(Signin());
-                    },
-                    child: Text(
-                      'Sign in',
-                      style: AppTextConstant.BoldStyle.copyWith(
-                          fontSize: 15, color: AppColorsConstants.AppMainColor),
+                CustomTextFieldSignup(
+                  controller: signupController.firstNameController,
+                  keyboardType: TextInputType.name,
+                  hintText: 'First name',
+                  prefixIcon: Transform.scale(
+                    scaleX: .4,
+                    scaleY: .4,
+                    child: SvgPicture.asset(
+                      'assets/Iconly-Bold-Profile.svg',
                     ),
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-            ],
+                ),
+                sizeBoxHeight,
+                CustomTextFieldSignup(
+                  controller: signupController.lastNameController,
+                  keyboardType: TextInputType.name,
+                  hintText: 'Last name',
+                  prefixIcon: Transform.scale(
+                    scaleX: .4,
+                    scaleY: .4,
+                    child: SvgPicture.asset(
+                      'assets/Iconly-Bold-Profile.svg',
+                    ),
+                  ),
+                ),
+                sizeBoxHeight,
+                CustomTextFieldSignup(
+                  controller: signupController.emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  hintText: 'Email',
+                  prefixIcon: Transform.scale(
+                    scaleX: .4,
+                    scaleY: .4,
+                    child: SvgPicture.asset(
+                      'assets/email.svg',
+                    ),
+                  ),
+                ),
+                sizeBoxHeight,
+                CustomTextFieldSignup(
+                  controller: signupController.phoneNumberController,
+                  keyboardType: TextInputType.phone,
+                  hintText: 'Phone number',
+                  prefixIcon: Transform.scale(
+                    scaleX: .4,
+                    scaleY: .4,
+                    child: SvgPicture.asset(
+                      'assets/phone.svg',
+                    ),
+                  ),
+                ),
+                sizeBoxHeight,
+                CustomTextFieldSignup(
+                  controller: signupController.addressController,
+                  keyboardType: TextInputType.text,
+                  hintText: 'Address',
+                  prefixIcon: Transform.scale(
+                    scaleX: .4,
+                    scaleY: .4,
+                    child: SvgPicture.asset(
+                      'assets/Location.svg',
+                    ),
+                  ),
+                ),
+                sizeBoxHeight,
+                CustomTextFieldSignup(
+                  controller: signupController.dOBController,
+                  readOnly: true,
+                  onTap: () {
+                    signupController.selectDOB(context);
+                  },
+                  hintText: 'MM DD YYYY',
+                  prefixIcon: Transform.scale(
+                    scaleX: .4,
+                    scaleY: .4,
+                    child: SvgPicture.asset(
+                      'assets/Calendar.svg',
+                    ),
+                  ),
+                ),
+                sizeBoxHeight,
+                CustomTextFieldSignup(
+                  controller: signupController.passwordController,
+                  keyboardType: TextInputType.visiblePassword,
+                  suffixIcon: Transform.scale(
+                    scaleX: .7,
+                    scaleY: .7,
+                    child: SvgPicture.asset(
+                      'assets/eye.svg',
+                    ),
+                  ),
+                  hintText: 'Password',
+                  prefixIcon: Transform.scale(
+                    scaleX: .4,
+                    scaleY: .4,
+                    child: SvgPicture.asset(
+                      'assets/Lock.svg',
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        signupController.isCheckedTC.value =
+                            !signupController.isCheckedTC.value;
+                      },
+                      child: Container(
+                        height: 20,
+                        width: 20,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              blurRadius: 2, // Blur radius
+                              offset: Offset(1.1, 2.1),
+                            ),
+                          ],
+                        ),
+                        child: signupController.isCheckedTC.value
+                            ? Icon(
+                                Icons.check,
+                                size: 15,
+                                color: Colors.green,
+                              )
+                            : null,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 6,
+                    ),
+                    Text('I agree to'),
+                    InkWell(
+                      onTap: () => Get.toNamed(RoutesName.PrivacyPolicyScreen),
+                      child: Text(
+                        'Terms and Conditions',
+                        style:
+                            TextStyle(color: AppColorsConstants.AppMainColor),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: Get.height * 0.025,
+                ),
+                signupController.isSignUpLoading.value
+                    ? SizedBox(
+                  height: 30,
+                  width: 30,
+                      child: CircularProgressIndicator(
+                          color: AppColorsConstants.AppMainColor),
+                    )
+                    : CustomElevatedButton(
+                        width: Get.width * 0.4,
+                        text: 'Sign up',
+                        onpress: () {
+                          signupController.signUpHandle(
+                            userEmail:
+                                signupController.emailController.text.trim(),
+                            userPassword:
+                                signupController.passwordController.text.trim(),
+                            userPhoneNumber:
+                                signupController.phoneNumberController.text,
+                            userDOB: signupController.dOBController.text,
+                            userAddress:
+                                signupController.addressController.text,
+                            userLastName:
+                                signupController.lastNameController.text,
+                            userFirstName:
+                                signupController.firstNameController.text,
+                            timeStamp: DateTime.now(),
+                          );
+
+                          // Get.toNamed(RoutesName.Signin);
+                        },
+                      ),
+                sizeBoxHeight,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Already have an Account?',
+                      style: AppTextConstant.SimpleStyle,
+                    ),
+                    SizedBox(width: 5),
+                    InkWell(
+                      onTap: () {
+                        Get.to(Signin());
+                      },
+                      child: Text(
+                        'Sign in',
+                        style: AppTextConstant.BoldStyle.copyWith(
+                            fontSize: 15,
+                            color: AppColorsConstants.AppMainColor),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
           ),
         ),
       ),

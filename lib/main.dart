@@ -1,10 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'Constant/Constants/routes/routes.dart';
+import 'Constant/Constants/routes/routesName.dart';
+import 'firebase_options.dart';
 
-import 'package:tyedapp/Constant/Constants/routes/routes.dart';
-import 'package:tyedapp/Constant/Constants/routes/routesName.dart';
+void main() async{
 
-void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
