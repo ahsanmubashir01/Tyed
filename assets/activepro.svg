@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64.209" height="20.833" viewBox="0 0 64.209 20.833">
+  <g id="Group_11354" data-name="Group 11354" transform="translate(-250.375 -848)">
+    <g id="Iconly_Bulk_Profile" data-name="Iconly/Bulk/Profile" transform="translate(246.375 846)">
+      <g id="Profile" transform="translate(4 2)">
+        <path id="Fill_1" data-name="Fill 1" d="M8.33,0C3.838,0,0,.708,0,3.542S3.814,7.109,8.33,7.109c4.493,0,8.33-.707,8.33-3.542S12.848,0,8.33,0" transform="translate(0 13.724)" fill="#f34d4d"/>
+        <path id="Fill_4" data-name="Fill 4" d="M5.513,11.025A5.513,5.513,0,1,0,0,5.513a5.493,5.493,0,0,0,5.513,5.513" transform="translate(2.818 0)" fill="#f34d4d"/>
+      </g>
+    </g>
+    <g id="Home" transform="translate(116.584 845.457)">
+      <text id="Profile-2" data-name="Profile" transform="translate(158 17.959)" fill="#f34d4d" font-size="14" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Profile</tspan></text>
+    </g>
+  </g>
+</svg>
