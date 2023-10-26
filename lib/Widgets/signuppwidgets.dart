@@ -14,6 +14,7 @@ class CustomTextFieldSignup extends StatelessWidget {
   final Widget? suffixIcon;
   final TextInputType? keyboardType;
   final bool? readOnly;
+  final bool? obscureText;
   final Callback? onTap;
   const CustomTextFieldSignup(
       {this.onChanged,
@@ -23,6 +24,7 @@ class CustomTextFieldSignup extends StatelessWidget {
       this.suffixIcon,
       this.keyboardType,
       this.readOnly,
+      this.obscureText,
       this.onTap});
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,7 @@ class CustomTextFieldSignup extends StatelessWidget {
       height: Get.height * 0.058,
       child: TextFormField(
         onTap: onTap,
+        obscureText: obscureText ?? false,
         readOnly: readOnly ?? false,
         keyboardType: keyboardType,
         onChanged: onChanged,

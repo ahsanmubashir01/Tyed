@@ -9,18 +9,17 @@ import '../../Widgets/CustomButton.dart';
 import '../../Widgets/signuppwidgets.dart';
 import '../../viewModel/SignupController/SignUpController.dart';
 
-import '../Signin/signin.dart';
+import '../Signin/SignInScreen.dart';
 
-class Signup extends StatefulWidget {
-  Signup({super.key});
+class SignUpScreen extends StatefulWidget {
+  SignUpScreen({super.key});
 
   @override
-  State<Signup> createState() => _SignupState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignupState extends State<Signup> {
-  SignupController signupController =
-      Get.put(SignupController(), tag: 'signupController');
+class _SignUpScreenState extends State<SignUpScreen> {
+  SignupController signupController = Get.find(tag: 'signupController');
 
   var sizeBoxHeight = SizedBox(height: Get.height * 0.015);
 
@@ -133,12 +132,22 @@ class _SignupState extends State<Signup> {
                 sizeBoxHeight,
                 CustomTextFieldSignup(
                   controller: signupController.passwordController,
+                  obscureText: signupController.isShowPassword.value,
                   keyboardType: TextInputType.visiblePassword,
-                  suffixIcon: Transform.scale(
-                    scaleX: .7,
-                    scaleY: .7,
-                    child: SvgPicture.asset(
-                      'assets/eye.svg',
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      signupController.isShowPassword.value =
+                          !signupController.isShowPassword.value;
+                    },
+                    child: Transform.scale(
+                      scaleX: .7,
+                      scaleY: .7,
+                      alignment: Alignment.center,
+                      child: signupController.isShowPassword.value
+                          ? SvgPicture.asset(
+                              'assets/eye.svg',
+                            )
+                          : Icon(Icons.password_outlined, color: Colors.grey),
                     ),
                   ),
                   hintText: 'Password',
@@ -204,16 +213,16 @@ class _SignupState extends State<Signup> {
                 ),
                 signupController.isSignUpLoading.value
                     ? SizedBox(
-                  height: 30,
-                  width: 30,
-                      child: CircularProgressIndicator(
-                          color: AppColorsConstants.AppMainColor),
-                    )
+                        height: 30,
+                        width: 30,
+                        child: CircularProgressIndicator(
+                            color: AppColorsConstants.AppMainColor),
+                      )
                     : CustomElevatedButton(
                         width: Get.width * 0.4,
                         text: 'Sign up',
                         onpress: () {
-                          signupController.signUpHandle(
+                          signupController.signUpHandler(
                             userEmail:
                                 signupController.emailController.text.trim(),
                             userPassword:
@@ -229,8 +238,6 @@ class _SignupState extends State<Signup> {
                                 signupController.firstNameController.text,
                             timeStamp: DateTime.now(),
                           );
-
-                          // Get.toNamed(RoutesName.Signin);
                         },
                       ),
                 sizeBoxHeight,
@@ -244,7 +251,7 @@ class _SignupState extends State<Signup> {
                     SizedBox(width: 5),
                     InkWell(
                       onTap: () {
-                        Get.to(Signin());
+                        Get.to(SignInScreen());
                       },
                       child: Text(
                         'Sign in',

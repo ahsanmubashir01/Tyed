@@ -160,5 +160,29 @@ class Utils {
     );
   }
 
-
+  static Future<void> loadingDialog(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+          insetPadding: EdgeInsets.symmetric(
+              horizontal: Get.height * 0.17, vertical: Get.height * 0.43),
+          clipBehavior: Clip.hardEdge,
+          content: Builder(
+            builder: (context) {
+              return SizedBox(
+                // height: 30,
+                child: Center(
+                  child: CircularProgressIndicator(
+                      color: AppColorsConstants.AppMainColor),
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
 }

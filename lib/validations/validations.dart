@@ -20,6 +20,8 @@ class Validations{
           ' Log in again before retrying this request.';
     } else if (e.contains('firebase_auth/channel-error')) {
       return 'Invalid credentials.';
+    } else if (e.contains('firebase_auth/INVALID_LOGIN_CREDENTIALS')) {
+      return 'Invalid login credentials.';
     } else {
       return e;
     }

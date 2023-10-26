@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:tyedapp/models/SignUpModel.dart';
 
+import '../../Constant/Constants/routes/routesName.dart';
 import '../../validations/validations.dart';
 
 class SignupController extends GetxController {
@@ -21,9 +22,11 @@ class SignupController extends GetxController {
   TextEditingController dOBController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   var isCheckedTC = false.obs;
+  var isShowPassword = true.obs;
   var isSignUpLoading = false.obs;
   final FirebaseAuth auth = FirebaseAuth.instance;
 
+  // Set Fire-store date to Model
   final userData = FirebaseFirestore.instance
       .collection('users')
       .withConverter<SignUpModel>(
@@ -31,7 +34,9 @@ class SignupController extends GetxController {
         toFirestore: (users, _) => users.toJson(),
       );
 
-  signUpHandle(
+
+  // Sign Up Method
+  signUpHandler(
       {userFirstName,
       userLastName,
       userEmail,
@@ -66,8 +71,6 @@ class SignupController extends GetxController {
               userDOB: userDOB,
               userPassword: userPassword,
               timeStamp: timeStamp);
-
-          // isSignUpLoading.value = false;
         }
       } on FirebaseAuthException catch (e) {
         Get.snackbar(
@@ -75,10 +78,11 @@ class SignupController extends GetxController {
         isSignUpLoading.value = false;
       }
     } else {
-      Get.snackbar('Required', 'Field are Required');
+      Get.snackbar('Required', 'All fields are Required');
     }
   }
 
+  // Add user data in fire-store
   Future<void> addUser(userID,
       {userFirstName,
       userLastName,
@@ -101,6 +105,8 @@ class SignupController extends GetxController {
             timeStamp: timeStamp))
         .then(
       (value) {
+        Get.snackbar('Success', 'User Registered Successfully.');
+        Get.offAllNamed(RoutesName.SignIn);
         isSignUpLoading.value = false;
         log("User Added");
       },
